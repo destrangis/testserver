@@ -1,0 +1,24 @@
+This is just an example of using Server Name Indication (SNI) on a HTTP server that chooses a certificate based on the hostname that the client wants to connect to. I wrote it just for illustration.
+
+In order to use it, just generate certificates for hosts 'pantagruel' and 'badabec':
+
+    $ . create_certificates
+
+Add the hosts to your /etc/hosts file, so that they can be resolved by a web browser:
+
+    127.0.0.1   badabec pantagruel
+
+And then run the program:
+
+    $ python3 server.py
+    Listening on 0.0.0.0:8080
+
+And launch the browser to http://pantagruel:8080 or http://badabec:8080, mind that the browser will complain about the self-signed certificates. Just create an exception for them.
+
+You can also use the 'requests' module:
+
+    >>> import requests
+    >>> resp = requests.get("https://badabec:8080/", verify=False)
+    >>> resp.text
+    'All fine\r\n'
+
