@@ -63,7 +63,12 @@ class Server:
                 break
 
         print("RECEIVED: {}".format(data))
-        response = b"HTTP/1.1 200 OK\r\nServer: pepito\r\nContent-length: 10\r\nContent-type: text/plain\r\nConnection: close\r\n\r\nAll fine\r\n"
+        response = (b"HTTP/1.1 200 OK\r\n"
+                    b"Server: testserver by destrangis\r\n"
+                    b"Content-length: 10\r\n"
+                    b"Content-type: text/plain\r\n"
+                    b"Connection: close\r\n\r\n"
+                    b"All fine\r\n")
         stream.send(response)
 
 if __name__ == "__main__":
